@@ -1,0 +1,93 @@
+select count(*) from taxi 
+select * from taxi_zone_lookup limit 1
+
+
+select  t.*,
+        pul."Zone" AS pickup_zone,
+		dol."Zone" as dropff_zone
+    from taxi t 
+	JOIN taxi_zone_lookup pul ON t."PULocationID"= pul."LocationID" 
+	JOIN taxi_zone_lookup dol ON t. "DOLocationID" = dol."LocationID"
+	
+--JOINING Two tables
+select  
+       t.tpep_pickup_datetime,t.tpep_dropoff_datetime,t.total_amount,t.trip_distance,
+        pul."Zone"||'-'||pul."Borough"  AS pickup_zone,
+		dol."Zone" || '-' ||dol."Borough" as dropff_zone
+    from taxi t 
+	JOIN taxi_zone_lookup pul ON t."PULocationID"= pul."LocationID" 
+	JOIN taxi_zone_lookup dol ON t. "DOLocationID" = dol."LocationID"
+    LIMIT 10
+
+--Analyzing rush hours
+SELECT 
+   DATE(t.tpep_pickup_datetime), DATE_PART('hour', t.tpep_pickup_datetime) AS hour,
+    pul."Borough",
+    COUNT(*) AS total_rides
+FROM taxi t
+JOIN taxi_zone_lookup pul ON t."PULocationID" = pul."LocationID"
+GROUP BY hour, pul."Borough",DATE(t.tpep_pickup_datetime)
+ORDER BY total_rides DESC;
+
+#payment methods
+create table payment_types(
+    payment_id INTEGER PRIMARY KEY,
+	payment_description TEXT
+);
+
+INSERT INTO payment_types (payment_id,payment_description)
+VALUES
+(1, 'Credit card'),
+(2, 'Cash'),
+(3, 'No charge'),
+(4, 'Dispute'),
+(5, 'Unknown'),
+(6, 'Voided trip');
+
+select 
+   t.payment_type ,pt.payment_description
+   from taxi t
+   JOIN payment_types pt
+   ON t.payment_type = pt.payment_id
+   ORDER BY payment_type desc
+
+CREATE TABLE rate_code (
+    rate_code_id INTEGER PRIMARY KEY,
+    rate_description TEXT
+);
+
+INSERT INTO rate_code (rate_code_id, rate_description)
+VALUES 
+(1, 'Standard rate'),
+(2, 'JFK'),
+(3, 'Newark'),
+(4, 'Nassau or Westchester'),
+(5, 'Negotiated fare'),
+(6, 'Group ride');
+
+CREATE TABLE store_and_fwd_flag (
+    flag TEXT PRIMARY KEY,
+    description TEXT
+);
+INSERT INTO store_and_fwd_flag (flag, description)
+VALUES 
+('Y', 'Store and forward trip'),
+('N', 'Not a store and forward trip');
+
+SELECT 
+    t.*,
+    p.payment_description,
+    r.rate_description,
+    s.description AS store_and_fwd_description,
+    pul."Zone" AS pickup_zone,
+    pul."Borough" AS pickup_borough,
+    dol."Zone" AS dropoff_zone,
+    dol."Borough" AS dropoff_borough
+FROM taxi t
+LEFT JOIN payment_types p ON t.payment_type = p.payment_id
+LEFT JOIN rate_code r ON t."RatecodeID" = r.rate_code_id
+LEFT JOIN store_and_fwd_flag s ON t.store_and_fwd_flag = s.flag
+LEFT JOIN taxi_zone_lookup pul ON t."PULocationID" = pul."LocationID"
+LEFT JOIN taxi_zone_lookup dol ON t."DOLocationID" = dol."LocationID";
+
+select "RatecodeID" from taxi limit 1
