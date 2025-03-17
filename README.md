@@ -12,4 +12,16 @@ The NYC Taxi dataset, comprising over 1.3 million rows, offers a wealth of insig
 
 **architecture **
 
-![image](https://github.com/user-attachments/assets/a2ae7a92-7920-4750-8cc3-955e40f947b1)
+![Screenshot 2025-03-16 at 1 48 07 PM](https://github.com/user-attachments/assets/e5de2bb6-b5a9-44df-b15f-2518f02f0385)
+
+**Technologies Used**:  
+- **PostgreSQL (pgAdmin)**: For storing and managing the data, as well as creating new tables to enhance the dataset (payment_types, flag, and rate tables).
+- **Docker**: To containerize the environment, ensuring consistency and scalability while pulling the large dataset.
+- **Git**: For version control and collaboration, enabling efficient management and sharing of the project code.
+- **CSV**: The data was initially pulled in CSV format from the NYC Taxi dataset for analysis.
+- **SQL**: For querying the database, analyzing the dataset, and creating new tables.
+- **pgAdmin**: A graphical interface for PostgreSQL to manage, query, and visualize the data.
+- **Python **: For further data cleaning or manipulation and visulaization
+
+  ![Screenshot 2025-03-16 at 6 11 34 PM](https://github.com/user-attachments/assets/f1c1c9b1-da92-4da2-960d-d487d86f6fcc)
+
