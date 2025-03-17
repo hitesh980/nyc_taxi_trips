@@ -70,3 +70,10 @@ This bar chart, titled "Total Amount Collected by Payment Description," displays
 The chart demonstrates that Credit Card payments lead significantly, contributing over 16 million dollars to the total revenue. Cash payments follow as the second-largest category, generating approximately 6 million dollars, which is less than half of the revenue from credit card transactions. The remaining categories, No Charge and Dispute, contribute minimally, with amounts close to zero.
 
 This visualization highlights the overwhelming preference for credit card payments among NYC taxi passengers, reflecting a strong trend toward cashless transactions. It also underscores the negligible financial impact of non-payment scenarios (No Charge and Dispute).
+
+<img width="1012" alt="Screenshot 2025-03-17 at 12 00 23 PM" src="https://github.com/user-attachments/assets/4a74ce3a-9168-4c6b-950f-9987992ea98a" />
+Insights:
+Manhattan shows the highest total amount collected, especially around 11 AM to 6 PM, peaking at 1.52 million.
+Queens and Brooklyn follow, but with significantly lower amounts compared to Manhattan.
+Bronx, Staten Island, and EWR show minimal activity.
+The Unknown category also reflects notable amounts, possibly from data with missing location details.
